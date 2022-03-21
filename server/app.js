@@ -5,7 +5,17 @@ var app = require('koa')()
   , onerror = require('koa-onerror');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var users = require('./routes/user');
+
+// 跨域处理
+const cors = require('koa-cors')
+app.use(cors)
+
+//数据库处理
+const mongoose = require('mongoose')
+const CONFIG = require('./config/config');
+const Application = require('koa');
+mongoose.connect(CONFIG.mongodb)
 
 // error handler
 onerror(app);
@@ -31,6 +41,8 @@ app.use(require('koa-static')(__dirname + '/public'));
 // routes definition
 app.use(index.routes(), index.allowedMethods());
 app.use(users.routes(), users.allowedMethods());
+
+
 
 // error-handling
 app.on('error', (err, ctx) => {

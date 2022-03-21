@@ -12,4 +12,7 @@ router.get('/foo', function *(next) {
   });
 });
 
-module.exports = router;
+module.exports = () => {
+  //login
+  router.post('/login', require('./user'.login))
+};
