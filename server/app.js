@@ -5,11 +5,10 @@ var app = require('koa')()
   , onerror = require('koa-onerror');
 
 var index = require('./routes/index');
-var users = require('./routes/user');
 
 // 跨域处理
 const cors = require('koa-cors')
-app.use(cors)
+app.use(cors())
 
 //数据库处理
 const mongoose = require('mongoose')
@@ -40,13 +39,14 @@ app.use(require('koa-static')(__dirname + '/public'));
 
 // routes definition
 app.use(index.routes(), index.allowedMethods());
-app.use(users.routes(), users.allowedMethods());
-
-
 
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 });
+
+app.listen(3000, () => {
+  console.log('服务在3000端口已启动')
+})
 
 module.exports = app;

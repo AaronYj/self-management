@@ -7,32 +7,32 @@ const routes = [
   {
     path: '/',
     name: 'login',
-    component: () => import('@/pages/login.vue')
+    component: () => import('@/views/login.vue')
   },
   {
     path: '/home',
     name: 'home',
-    component: () => import('@/pages/home.vue'),
+    component: () => import('@/views/home.vue'),
     children: [
       {
 			path: '',
-			component: () => import('@/pages/home.vue'),
+			component: () => import('@/views/home.vue'),
 			meta: [],
 		},{
 			path: '/articeAdmin',
-			component: () => import('@/pages/artice/artice-admin.vue'),
+			component: () => import('@/views/artice/artice-admin.vue'),
 			meta: ['文章管理', '文章目录'],
 		},{
-			path: '/addArticle',
-			component: () => import('@/pages/artice/add-article.vue'),
+			path: '/addArtice',
+			component: () => import('@/views/artice/add-artice.vue'),
 			meta: ['文章管理', '写文章'],
 		},{
-      path: '/drafts',
-      component: () => import('@/pages/artice/drafts'),
+      path: '/articeDrafts',
+      component: () => import('@/views/artice/artice-drafts'),
       meta: ['文章管理', '草稿箱'],
     },{
 			path: '/articeDetail',
-			component: () => import('@/pages/artice/artice-detail.vue'),
+			component: () => import('@/views/artice/artice-detail.vue'),
 			meta: ['文章管理', '文章详情'],
 		}
   ]

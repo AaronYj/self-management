@@ -1,18 +1,7 @@
 var router = require('koa-router')();
 
-router.get('/', function *(next) {
-  yield this.render('index', {
-    title: 'Hello World Koa!'
-  });
-});
+//login
+router.post('/login', require('./user').login)
 
-router.get('/foo', function *(next) {
-  yield this.render('index', {
-    title: 'Hello World foo!'
-  });
-});
 
-module.exports = () => {
-  //login
-  router.post('/login', require('./user'.login))
-};
+module.exports = router
