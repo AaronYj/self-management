@@ -1,52 +1,46 @@
-var app = require('koa')()
-  , logger = require('koa-logger')
-  , json = require('koa-json')
-  , views = require('koa-views')
-  , onerror = require('koa-onerror');
-
-var index = require('./routes/index');
-
-// 跨域处理
-const cors = require('koa-cors')
-app.use(cors())
-
-//数据库处理
+const Koa = require('koa')
+const path = require('path')
+const router = require('./routes')
+const views = require('koa-views') // 处理模板引擎
+const serve = require('koa-static') // 处理静态资源
 const mongoose = require('mongoose')
-const CONFIG = require('./config/config');
-const Application = require('koa');
+const CONFIG = require('./config/config')
+const session = require('koa-session')
+const bodyParser = require('koa-bodyparser')
+const cors = require('koa2-cors')
 mongoose.connect(CONFIG.mongodb)
 
-// error handler
-onerror(app);
+const app = new Koa()
 
-// global middlewares
-app.use(views('views', {
-  root: __dirname + '/views',
-  default: 'jade'
-}));
-app.use(require('koa-bodyparser')());
-app.use(json());
-app.use(logger());
 
-app.use(function *(next){
-  var start = new Date;
-  yield next;
-  var ms = new Date - start;
-  console.log('%s %s - %s', this.method, this.url, ms);
-});
+// 使用模板引擎
+app.use(views(path.join(__dirname, 'views'), {
+  map: {
+    html: 'nunjucks'
+  }
+}))
+// 引入静态资源
+app.use(serve(
+  path.join(__dirname, 'public')
+))
+// 操作session会话
+app.keys = ['somethings']
+app.use(session({
+  key: CONFIG.session.key,
+  maxAge: CONFIG.session.maxAge
+}, app))
 
-app.use(require('koa-static')(__dirname + '/public'));
+app.use(bodyParser())
 
-// routes definition
-app.use(index.routes(), index.allowedMethods());
+app.use(cors())
 
-// error-handling
-app.on('error', (err, ctx) => {
-  console.error('server error', err, ctx)
-});
+app.use(async (ctx, next) => {
+  ctx.state.ctx = ctx
+  await next()
+})
+
+router(app)
 
 app.listen(3000, () => {
   console.log('服务在3000端口已启动')
 })
-
-module.exports = app;

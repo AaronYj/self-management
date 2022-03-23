@@ -59,18 +59,19 @@ export default {
         if (valid) {
           const res = await login({ username: this.loginForm.username, password: this.loginForm.password })
           console.log(res)
-          // if (res.status == 1) {
-          //   this.$message({
-          //     type: 'success',
-          //     message: '登录成功'
-          //   });
-          //   this.$router.push('home')
-          // } else {
-          //   this.$message({
-          //     type: 'error',
-          //     message: res.message
-          //   });
-          // }
+          const { data } = res
+          if (res.status == 200) {
+            this.$message({
+              type: 'success',
+              message: data.message
+            });
+            this.$router.push('home')
+          } else {
+            this.$message({
+              type: 'error',
+              message: data.message
+            });
+          }
         } else {
           this.$notify.error({
             title: '错误',
@@ -94,7 +95,7 @@ export default {
 }
 .manage_tip {
   position: absolute;
-  width: 111%;
+  width: 115%;
   top: -137px;
   left: -14px;
   p {
