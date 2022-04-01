@@ -58,14 +58,14 @@ export default {
       this.$refs[formData].validate(async (valid) => {
         if (valid) {
           const res = await login({ username: this.loginForm.username, password: this.loginForm.password })
-          console.log(res)
           const { data } = res
-          if (res.status == 200) {
+          console.log(data)
+          if (data.status === 200) {
             this.$message({
               type: 'success',
               message: data.message
             });
-            this.$router.push('home')
+            this.$router.push('layout')
           } else {
             this.$message({
               type: 'error',
