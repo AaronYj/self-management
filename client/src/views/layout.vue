@@ -39,7 +39,7 @@
       <i-col span="5" class="layout-menu-left">
         <Menu :active-name="defaultActive" width="auto" :open-names="['2']">
           <Menu-item name="layout" to="/layout" class="first-menu"
-            ><Icon type="navicon-round"></Icon>首页</Menu-item
+            ><Icon type="ios-apps"></Icon>首页</Menu-item
           >
           <Submenu name="2">
             <template slot="title">
@@ -152,11 +152,11 @@ export default {
 .ivu-menu {
   background: #1b2032;
   color: #fff;
-  font-size: 16px;
+  font-size: 13px;
 }
 .ivu-menu-item {
   color: #fff;
-  font-size: 16px;
+  font-size: 13px;
 }
 
 .ivu-menu-light.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu) {
@@ -167,20 +167,20 @@ export default {
 .layout-header {
   background-color: #1b2032;
   box-sizing: border-box;
-  height: 60px;
+  height: 50px;
   width: 100%;
 }
 .layout-logo {
-  height: 60px;
-  line-height: 60px;
+  height: 50px;
+  line-height: 50px;
   text-align: center;
-  font-size: 22px;
+  font-size: 18px;
   color: #ffffff;
   border-radius: 3px;
   float: left;
   position: relative;
   top: 0px;
-  left: 65px;
+  left: 40px;
 }
 .layout-header-right {
   display: flex;
@@ -193,14 +193,14 @@ export default {
 .layout-header-right .ivu-icon {
   display: block;
   height: 100%;
-  line-height: 60px;
-  width: 60px;
+  line-height: 50px;
+  width: 50px;
   color: #ffffff;
-  font-size: 36px;
+  font-size: 30px;
   text-align: center;
 }
 .ivu-dropdown-item {
-  font-size: 15px !important;
+  font-size: 12px !important;
 }
 .active {
   background-color: #29304b;

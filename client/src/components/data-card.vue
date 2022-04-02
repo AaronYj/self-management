@@ -44,7 +44,7 @@ export default {
     .card-status {
       .card-content {
         display: flex;
-        margin-bottom: 16px;
+        margin-bottom: 10px;
         // position: relative;
         margin-left: 0;
         margin-right: 0;
@@ -85,7 +85,7 @@ export default {
           font-size: 14px;
           .icon {
             margin-left: 5px;
-            margin-right: 15px;
+            margin-right: 5px;
             position: relative;
             top: 0;
             color: #66615b;
