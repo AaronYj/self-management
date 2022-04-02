@@ -43,7 +43,8 @@
           >
           <Submenu name="2">
             <template slot="title">
-              <Icon type="ios-navigate"></Icon><span class="ivu-text">文章管理</span>
+              <Icon type="ios-navigate"></Icon
+              ><span class="ivu-text">文章管理</span>
             </template>
             <Menu-item name="articeAdmin" to="/articeAdmin">文章目录</Menu-item>
             <Menu-item name="addArtice" to="/addArtice">写文章</Menu-item>
@@ -67,7 +68,7 @@
           </Submenu> -->
         </Menu>
       </i-col>
-      <i-col :span="spanRight">
+      <i-col :span="spanRight" class="layout-main">
         <div class="layout-breadcrumb">
           <Breadcrumb>
             <Breadcrumb-item :to="{ path: '/layout' }">首页</Breadcrumb-item>
@@ -91,6 +92,7 @@
 export default {
   data () {
     return {
+      value: '',
       isActive: '',
       spanLeft: 5,
       spanRight: 19
@@ -130,6 +132,16 @@ export default {
   overflow: hidden;
   height: 100vh;
 }
+.layout-main {
+  overflow: auto;
+  scroll-behavior: smooth;
+  transition: top 0.3s ease-in-out;
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  right: 0;
+}
+
 .ivu-row-flex {
   height: 100%;
 }
@@ -139,8 +151,6 @@ export default {
 .layout-content {
   min-height: 200px;
   margin: 15px;
-  overflow: hidden;
-  /* background: #fff; */
   border-radius: 4px;
 }
 .layout-content-main {
