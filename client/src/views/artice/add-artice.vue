@@ -42,7 +42,7 @@ export default {
     box-shadow: 0 2px 2px rgb(204 197 185 / 50%);
     background-color: #ffffff;
     color: #252422;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     display: flex;
     padding: 0 27px;
     justify-content: space-between;
@@ -73,7 +73,7 @@ export default {
     }
   }
   .artice-body {
-    height: 90%;
+    height: 780px;
     .input {
       width: 100%;
       height: 100%;

@@ -1,6 +1,9 @@
 <template>
   <div class="date-card">
-    <div class="card-header"></div>
+    <div class="card-header">
+      <span>日程安排</span>
+      <hr />
+    </div>
     <div class="card-body">
       <FullCalendar :options="calendarOptions" />
     </div>
@@ -21,8 +24,22 @@ export default {
     return {
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin],
-        initialView: 'dayGridMonth'
+        initialView: 'dayGridMonth',
+        dateClick: this.handleDateClick,
+        // events: [
+        //   {
+        //     title: 'event1', date: '2019-04-01'
+        //   },
+        //   {
+        //     title: 'event2', date: '2019-04-02'
+        //   }
+        // ]
       }
+    }
+  },
+  methods: {
+    handleDateClick (arg) {
+      alert('date click!' + arg.dateStr)
     }
   }
 }
@@ -43,6 +60,16 @@ export default {
   .card-header {
     padding: 20px 20px 0;
     border-bottom: 0;
+    span {
+      font-size: 23px;
+      font-weight: 500;
+    }
+    hr {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      border: 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
   }
   .card-body {
     width: 100%;
