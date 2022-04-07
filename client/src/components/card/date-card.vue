@@ -43,7 +43,6 @@ export default {
   .card-header {
     padding: 20px 20px 0;
     border-bottom: 0;
-    background-color: #fff;
   }
   .card-body {
     width: 100%;

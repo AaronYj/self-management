@@ -19,6 +19,11 @@ import FullCalendar from 'vue-full-calendar' //全局
 import moment from "moment"
 import 'fullcalendar/dist/fullcalendar.css'
 
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+// use
+Vue.use(mavonEditor)
+
 Vue.use(FullCalendar)
 
 Vue.use(VueAxios, axios)

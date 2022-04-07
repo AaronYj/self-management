@@ -20,6 +20,7 @@
     "iview": "^3.5.4",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
+    "mavon-editor": "^2.10.4",
     "vue": "^2.6.14",
     "vue-axios": "^3.4.1",
     "vue-full-calendar": "^2.8.1-0",
