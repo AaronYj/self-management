@@ -27,45 +27,45 @@
               type="ios-person-outline"
             ></Icon>
           </a>
-          <Dropdown-menu slot="list">
-            <Dropdown-item disabled>aaron</Dropdown-item>
+          <Dropdown-menu slot="list" events-enabled>
+            <Dropdown-item disabled>{{ user }}</Dropdown-item>
             <Dropdown-item>个人中心</Dropdown-item>
-            <Dropdown-item>退出登录</Dropdown-item>
+            <Dropdown-item @click.native="logout">退出登录</Dropdown-item>
           </Dropdown-menu>
         </Dropdown>
       </div>
     </div>
     <Row type="flex">
       <i-col span="5" class="layout-menu-left">
-        <Menu :active-name="defaultActive" width="auto" :open-names="['2']">
+        <Menu :active-name="defaultActive" width="auto" :open-names="['1']">
           <Menu-item name="layout" to="/layout" class="first-menu"
             ><Icon type="ios-apps"></Icon>首页</Menu-item
           >
+          <Submenu name="1">
+            <template slot="title">
+              <Icon type="ios-navigate"></Icon
+              ><span class="ivu-text">博客日记管理</span>
+            </template>
+            <Menu-item name="articeAdmin" to="/articeAdmin">目录</Menu-item>
+            <Menu-item name="addArtice" to="/addArtice">写博客</Menu-item>
+            <Menu-item name="articeDrafts" to="/articeDrafts">草稿箱</Menu-item>
+          </Submenu>
           <Submenu name="2">
             <template slot="title">
               <Icon type="ios-navigate"></Icon
-              ><span class="ivu-text">文章管理</span>
+              ><span class="ivu-text">学习工作进度管理</span>
             </template>
-            <Menu-item name="articeAdmin" to="/articeAdmin">文章目录</Menu-item>
-            <Menu-item name="addArtice" to="/addArtice">写文章</Menu-item>
+            <Menu-item name="articeAdmin" to="/articeAdmin">目录</Menu-item>
+            <Menu-item name="addArtice" to="/addArtice">写博客</Menu-item>
             <Menu-item name="articeDrafts" to="/articeDrafts">草稿箱</Menu-item>
-          </Submenu>
-          <!-- <Submenu name="2">
-            <template slot="title">
-              <Icon type="ios-keypad"></Icon>
-              导航二
-            </template>
-            <Menu-item name="2-1">选项 1</Menu-item>
-            <Menu-item name="2-2">选项 2</Menu-item>
           </Submenu>
           <Submenu name="3">
             <template slot="title">
-              <Icon type="ios-analytics"></Icon>
-              导航三
+              <Icon type="ios-navigate"></Icon
+              ><span class="ivu-text">日程安排管理</span>
             </template>
-            <Menu-item name="3-1">选项 1</Menu-item>
-            <Menu-item name="3-2">选项 2</Menu-item>
-          </Submenu> -->
+            <Menu-item name="schedule" to="/schedule">日程表</Menu-item>
+          </Submenu>
         </Menu>
       </i-col>
       <i-col :span="spanRight" class="layout-main">
@@ -89,25 +89,47 @@
   </div>
 </template>
 <script>
+import Cookies from "js-cookie"; // Cookie
 export default {
-  data () {
+  data() {
     return {
-      value: '',
-      isActive: '',
+      value: "",
+      isActive: "",
       spanLeft: 5,
-      spanRight: 19
+      spanRight: 19,
+      user: "",
+    };
+  },
+  mounted() {
+    if (!Cookies.get("user")) {
+      this.$message({
+        type: "error",
+        message: "请先登录！！！",
+      });
+      this.$router.push("/");
+    } else {
+      this.user = localStorage.getItem("userName");
     }
   },
   computed: {
-    iconSize () {
+    iconSize() {
       return this.spanLeft === 5 ? 14 : 24;
     },
     defaultActive: function () {
-      return this.$route.path.replace('/', '');
-    }
+      return this.$route.path.replace("/", "");
+    },
   },
   methods: {
-    toggleClick () {
+    logout() {
+      Cookies.remove("user");
+      localStorage.removeItem("userName");
+      this.$message({
+        type: "success",
+        message: "成功退出登录！！！",
+      });
+      this.$router.push("/");
+    },
+    toggleClick() {
       if (this.spanLeft === 5) {
         this.spanLeft = 2;
         this.spanRight = 22;
@@ -116,14 +138,14 @@ export default {
         this.spanRight = 19;
       }
     },
-    toBlue (str) {
-      this.isActive = str
+    toBlue(str) {
+      this.isActive = str;
     },
-    back () {
-      this.isActive = '0'
+    back() {
+      this.isActive = "0";
     },
-  }
-}
+  },
+};
 </script>
 <style scoped>
 .layout {

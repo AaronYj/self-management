@@ -18,24 +18,31 @@
 </template>
 
 <script>
-import dataCard from '../components/card/data-card.vue'
-import chartCard from '../components/card/chart-card.vue'
-import dateCard from '../components/card/date-card.vue'
-import operationLogCard from '../components/card/operation-log-card.vue'
+import dataCard from "../components/card/data-card.vue";
+import chartCard from "../components/card/chart-card.vue";
+import dateCard from "../components/card/date-card.vue";
+import operationLogCard from "../components/card/operation-log-card.vue";
 export default {
-  name: 'home',
+  name: "home",
   components: {
     [dataCard.name]: dataCard,
     [chartCard.name]: chartCard,
     [dateCard.name]: dateCard,
-    [operationLogCard.name]: operationLogCard
+    [operationLogCard.name]: operationLogCard,
   },
-  data () {
-    return {
-
+  data() {
+    return {};
+  },
+  mounted() {
+    if (!Cookies.get("user")) {
+      this.$message({
+        type: "error",
+        message: "请先登录！！！",
+      });
+      this.$router.push("/");
     }
   },
-}
+};
 </script>
 
 <style lang="less" scoped>

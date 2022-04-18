@@ -2,7 +2,7 @@
   <div class="add-artice">
     <div class="artice-header">
       <div class="header-left">
-        <input type="text" v-model="title" placeholder="输入文章标题..."/>
+        <input type="text" v-model="title" placeholder="输入文章标题..." />
       </div>
       <div class="header-right">
         <span class="margin">文章将自动保存至草稿箱</span>
@@ -23,8 +23,17 @@ export default {
     return {
       // markdown文本框中的所有内容都会返回一个string，直接将其传入数据库保存即可
       value: "",
-      title: ''
+      title: "",
     };
+  },
+  mounted() {
+    if (!Cookies.get("user")) {
+      this.$message({
+        type: "error",
+        message: "请先登录！！！",
+      });
+      this.$router.push("/");
+    }
   },
 };
 </script>

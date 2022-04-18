@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import  Cookies  from  'js-cookie' // Cookie
 import { login } from '@/api/service/user.js'
 
 export default {
@@ -59,8 +60,9 @@ export default {
         if (valid) {
           const res = await login({ username: this.loginForm.username, password: this.loginForm.password })
           const { data } = res
-          console.log(data)
           if (data.status === 200) {
+            Cookies.set('user', data.data)
+            localStorage.setItem('userName', data.data.username);
             this.$message({
               type: 'success',
               message: data.message
