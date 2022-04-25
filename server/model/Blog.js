@@ -3,16 +3,11 @@ const Schema = mongoose.Schema
 
 // 设计文章的表模型
 const BlogSchema = new Schema({
-  author: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    require: true
-  },
   title: {
     type: String,
     require: true
   },
-  content: {
+  value: {
     type: String,
     require: true
   },
@@ -32,7 +27,7 @@ const BlogSchema = new Schema({
   }
 })
 
-PostSchema.pre('save', function(next) { // 监听文章是否保存
+BlogSchema.pre('save', function(next) { // 监听文章是否保存
   if (this.isNew) {
     this.meta.createAt = this.meta.updateAt = Date.now()
   } else {
@@ -41,4 +36,4 @@ PostSchema.pre('save', function(next) { // 监听文章是否保存
   next()
 })
 
-module.exports = mongoose.model('Blog', BlogSchema)
+module.exports = mongoose.model('blog', BlogSchema)

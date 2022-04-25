@@ -3,13 +3,6 @@
     <div class="layout-header">
       <div class="layout-logo"><span>Aaron's System</span></div>
       <div class="layout-header-right">
-        <Input
-          v-model="value"
-          icon="ios-search"
-          placeholder="请输入关键词搜索"
-          style="width: 200px"
-          class="ivinput"
-        ></Input>
         <a href="/layout">
           <Icon
             @mouseover.native="toBlue('1')"
@@ -39,30 +32,28 @@
       <i-col span="5" class="layout-menu-left">
         <Menu :active-name="defaultActive" width="auto" :open-names="['1']">
           <Menu-item name="layout" to="/layout" class="first-menu"
-            ><Icon type="ios-apps"></Icon>首页</Menu-item
+            ><Icon type="ios-apps"></Icon>概览</Menu-item
           >
           <Submenu name="1">
             <template slot="title">
               <Icon type="ios-navigate"></Icon
-              ><span class="ivu-text">博客日记管理</span>
+              ><span class="ivu-text">文章管理</span>
             </template>
-            <Menu-item name="articeAdmin" to="/articeAdmin">目录</Menu-item>
-            <Menu-item name="addArtice" to="/addArtice">写博客</Menu-item>
-            <Menu-item name="articeDrafts" to="/articeDrafts">草稿箱</Menu-item>
+            <Menu-item name="articeAdmin" to="/articeAdmin">文章目录</Menu-item>
+            <Menu-item name="addArtice" to="/addArtice">写文章</Menu-item>
           </Submenu>
           <Submenu name="2">
             <template slot="title">
               <Icon type="ios-navigate"></Icon
-              ><span class="ivu-text">学习工作进度管理</span>
+              ><span class="ivu-text">学习进度管理</span>
             </template>
             <Menu-item name="articeAdmin" to="/articeAdmin">目录</Menu-item>
-            <Menu-item name="addArtice" to="/addArtice">写博客</Menu-item>
-            <Menu-item name="articeDrafts" to="/articeDrafts">草稿箱</Menu-item>
+            <Menu-item name="addArtice" to="/addArtice">写文章</Menu-item>
           </Submenu>
           <Submenu name="3">
             <template slot="title">
               <Icon type="ios-navigate"></Icon
-              ><span class="ivu-text">日程安排管理</span>
+              ><span class="ivu-text">日程管理</span>
             </template>
             <Menu-item name="schedule" to="/schedule">日程表</Menu-item>
           </Submenu>

@@ -26,20 +26,23 @@ export default {
         plugins: [dayGridPlugin, interactionPlugin],
         initialView: 'dayGridMonth',
         dateClick: this.handleDateClick,
-        // events: [
-        //   {
-        //     title: 'event1', date: '2019-04-01'
-        //   },
-        //   {
-        //     title: 'event2', date: '2019-04-02'
-        //   }
-        // ]
+        events: [
+          {
+            title: 'event1', date: '2022-04-01'
+          },
+          {
+            title: 'event2', date: '2022-04-02'
+          }
+        ]
       }
     }
   },
   methods: {
     handleDateClick (arg) {
-      alert('date click!' + arg.dateStr)
+      this.calendarOptions.events.push({
+        title: '添加的事件',
+        date: arg.dateStr
+      })
     }
   }
 }

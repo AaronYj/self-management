@@ -5,15 +5,8 @@
         <div class="card-content">
           <Icon type="ios-bookmarks"></Icon>
           <div class="card-number">
-            <p class="cate-category">文章总数</p>
-            <span>225</span>
-          </div>
-        </div>
-        <div class="card-footer">
-          <hr />
-          <div class="footer-stats">
-            <Icon type="ios-eye" class="icon"></Icon>
-            <span>首页展示文章数：64</span>
+            <p class="cate-category">{{ cardData.title }}</p>
+            <span>{{ cardData.titleCount }}</span>
           </div>
         </div>
       </div>
@@ -23,7 +16,13 @@
 
 <script>
 export default {
-  name: 'data-card'
+  name: 'data-card',
+  props: {
+    cardData: {
+      type: Object,
+      default: () => {}
+    }
+  }
 }
 </script>
 
@@ -67,28 +66,6 @@ export default {
             color: #9a9a9a;
             font-size: 16px;
             line-height: 1.4em;
-          }
-        }
-      }
-      .card-footer {
-        padding: 0;
-        line-height: 30px;
-        hr {
-          margin-top: 5px;
-          margin-bottom: 5px;
-          border: 0;
-          border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
-        .footer-stats {
-          color: #9a9a9a;
-          font-weight: 400;
-          font-size: 14px;
-          .icon {
-            margin-left: 5px;
-            margin-right: 5px;
-            position: relative;
-            top: 0;
-            color: #66615b;
           }
         }
       }

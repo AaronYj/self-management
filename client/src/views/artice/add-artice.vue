@@ -5,9 +5,7 @@
         <input type="text" v-model="title" placeholder="输入文章标题..." />
       </div>
       <div class="header-right">
-        <span class="margin">文章将自动保存至草稿箱</span>
-        <Button class="margin">草稿箱</Button>
-        <Button type="primary" class="margin">发布</Button>
+        <Button type="primary" class="margin" @click="submit">发布</Button>
       </div>
     </div>
     <div class="artice-body">
@@ -17,11 +15,15 @@
 </template>
 
 <script>
+import Cookies from "js-cookie"; // Cookie
+import { create } from "@/api/service/articeList.js";
+import { editSubmit } from "@/api/service/articeList.js";
 export default {
   name: "add-artice",
   data() {
     return {
       // markdown文本框中的所有内容都会返回一个string，直接将其传入数据库保存即可
+      Id: "0",
       value: "",
       title: "",
     };
@@ -34,6 +36,55 @@ export default {
       });
       this.$router.push("/");
     }
+    if (this.$route.params) {
+      this.title = this.$route.params.title;
+      this.value = this.$route.params.value;
+      if(this.$route.params._id) {
+        this.Id = this.$route.params._id
+      }
+    }
+  },
+  methods: {
+    async submit() {
+      if (this.Id.length !== 24) {
+        const { data } = await create({ title: this.title, value: this.value });
+        console.log('发布', data.result)
+        if (data.status === 200) {
+          this.$message({
+            type: "success",
+            message: data.message,
+          });
+          this.$router.push({
+            name: 'detail',
+            params: data.result
+          });
+        } else {
+          this.$message({
+            type: "error",
+            message: data.message,
+          });
+        }
+      } else {
+        const { data } = await editSubmit({
+          _id: this.Id,
+          title: this.title,
+          value: this.value,
+        });
+        console.log('更新', data.result)
+        if (data.status === 200) {
+          this.$message({
+            type: "success",
+            message: data.message,
+          });
+          this.$router.push('articeAdmin');
+        } else {
+          this.$message({
+            type: "error",
+            message: data.message,
+          });
+        }
+      }
+    },
   },
 };
 </script>
@@ -64,6 +115,7 @@ export default {
         color: #1d2129;
         padding: 0;
         border: 0;
+        width: 650px;
       }
     }
     .header-right {
@@ -74,10 +126,6 @@ export default {
       span {
         font-size: 12px;
         color: #c9cdd4;
-      }
-      .margin {
-        margin-left: 8px;
-        margin-right: 8px;
       }
     }
   }

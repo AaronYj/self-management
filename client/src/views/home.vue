@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="home-top">
-      <data-card v-for="(item, index) in 5" :key="index"></data-card>
+      <data-card v-for="(item, index) in cardDataList" :key="index" :cardData="item"></data-card>
     </div>
     <div class="home-middle">
       <chart-card></chart-card>
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import Cookies from "js-cookie"; // Cookie
 import dataCard from "../components/card/data-card.vue";
 import chartCard from "../components/card/chart-card.vue";
 import dateCard from "../components/card/date-card.vue";
@@ -31,7 +32,31 @@ export default {
     [operationLogCard.name]: operationLogCard,
   },
   data() {
-    return {};
+    return {
+      cardDataList: [
+        {
+          title: '文章总数',
+          titleCount:'20'
+        },
+        {
+          title: '文章分类总数',
+          titleCount:'5'
+        },
+        {
+          title: '技术分类总数',
+          titleCount:'15'
+        },
+        {
+          title: '技术点总数',
+          titleCount:'20'
+        },
+        {
+          title: '已学习技术总数',
+          titleCount:'20'
+        },
+        
+        ]
+    };
   },
   mounted() {
     if (!Cookies.get("user")) {
